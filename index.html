@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Task 2</title>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<style>
+.heading{
+    margin-top: 25px;
+    font-weight: bold;
+    font-size: 40px;
+    font-style: italic;
+    text-align: center;
+}
+
+
+.search input[type=text]{
+    width: 40%;
+    height:25px;
+    text-align:left;
+    margin-top: 50px;
+    margin-left: 30%;
+    border-radius: 5px;
+    border: 3px solid rgb(95, 29, 128);
+    font-size: 15px;
+}
+
+.categories-box{
+    margin-top: 60px;
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 4%;
+}
+
+.categories-box > a{
+    background-color:none;
+    margin: 10px;
+    padding:5px;
+    border: 2px solid black;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    font-style: italic;
+    color: black;
+    text-decoration: none;
+}
+  .categories-box :hover{
+    background-color: black;
+    color: violet;
+    cursor:pointer;
+}
+
+  .container{
+    display:grid;
+    height:950px;
+    padding: 4%;
+    justify-content: center;
+    grid-template-columns: auto auto auto;
+    gap:5% 6%;
+    margin:auto;
+}
+
+  .container > div{
+    background-color: white;
+    width:340px;
+    height: 450px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+}
+
+   .image-box{
+    position: relative;
+	overflow: hidden;
+    width: 340px;
+    height:340px;
+    border-radius:5px 5px 0px 0px;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+   }  
+
+  .image-box img{
+    max-width: 100%;
+    vertical-align: top;
+    -moz-transition: all 4s;
+	-webkit-transition: all 4s;
+	transition: all 4s;
+}
+
+.image-box:hover img{
+    -moz-transform: scale(1.1);
+	-webkit-transform: scale(1.1);
+	transform: scale(1.1);
+}
+
+.cat-text{
+    font-weight: bold;
+    font-style: italic;
+    font-size: 150%;
+    margin-top: 20px;
+}
+
+.price{
+    font-style: italic; 
+    font-size: 20px;
+}
+</style>
+        
+    </head>
+
+    <body style="background-color: rgb(228, 212, 228);">
+        <div class="heading">
+            All Mart Store
+        </div>
+        <div class="search">
+                <input id="myInput" type="text" placeholder="Search here.." onkeyup="searchfunc()" >  
+        </div>
+
+        <div class="categories-box" >
+            
+            <a id="all" href="#"> All </a>
+            <a id="sweets" href="#"> Sweets </a>
+            <a id="cakes" href="#"> Cakes </a>
+            <a id="cupcakes" href="#"> Cupcakes </a>
+            <a id="doughnuts" href="#"> Doughnuts </a>
+
+        </div>
+        
+        <div class=container id="Container">
+         
+            <div class="image-box cakes" > <img src="cake1.jpg">
+                <div class="cat-text">
+                    Cakes
+                </div> <br>
+                 <div class="price">Rs.80 </div> 
+            </div>
+
+            <div class="image-box sweets"> <img src="sweet.jpg"> 
+               <div class="cat-text"> 
+                   Sweets 
+                </div> <br>
+                <div class="price">Rs.120 </div>
+            </div>
+            
+            <div class="image-box cupcakes"> <img src="cupcake1.jpg">
+                <div class="cat-text">  
+                    Cupcakes  
+                </div> <br>
+                <div class="price">Rs.100 </div>
+            </div>
+
+            <div class="image-box doughnuts"> <img src="doughnut.jpg"> 
+                <div class="cat-text">   
+                    Doughnuts  
+                </div> <br>
+                <div class="price">Rs.120 </div>
+            </div>
+            
+            <div class="image-box cupcakes"> <img src="cupcake2.jpg">
+                <div class="cat-text">    
+                    Cupcakes  
+                </div> <br>
+                <div class="price">Rs.140 </div>
+            </div>
+
+            <div class="image-box cakes" > <img src="cake2.jpg"> 
+                <div class="cat-text">   
+                    Cakes  
+                </div> <br>
+                <div class="price">Rs.100 </div>
+            </div>
+            
+        </div>
+        
+    <script>
+$(function(){
+    var $cats = $('a').click(function(){
+        if (this.id == "all"){
+            $('#Container > div').show();
+        } else{
+            var $fil = $('.' + this.id).show();
+            $('#Container > div').not($fil).hide();
+        }
+    })
+
+});
+
+function searchfunc(){
+    let filter = document.getElementById('myInput') .value.toLowerCase();
+
+    let categ = document.getElementById('Container');
+
+    let box = document.getElementsByClassName('image-box');
+
+    for(var i=0; i<box.length; i++){
+        let names = box[i].getElementsByClassName('cat-text')[0];
+
+        if(names){
+            let textvalue = names.textContent || names.innerHTML;
+
+            if(textvalue.toLowerCase().indexOf(filter) > -1) {
+              box[i].style.display = "";
+          }  
+              else {box[i].style.display = "none";
+            }
+        }
+    }
+}
+
+
+</script>
+
+    </body>
+</html>
